@@ -1,43 +1,23 @@
 import { useState } from 'react'
-import logo from './logo.svg'
 import './App.css'
-
+import { Navbar} from './components/Navbar/Navbar'
+import {Home} from './pages/Home'
+import { MainRoutes } from './pages/MainRoutes'
+import UserDashboard from './pages/UserDashboard'
+import { Dashboard } from './components/User Dashboard/Dashboard'
+import {Navbar as UserNavbar} from './components/User Dashboard/UserNavbar'
+import Footer from './components/Footer/Footer'
 function App() {
-  const [count, setCount] = useState(0)
-
+  const[log,setLog]= useState(false);
+  const handleLog=()=>{
+    setLog(!log);
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.jsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
-      </header>
+   {log?<UserNavbar handleLog={handleLog}/>:<Navbar handleLog={handleLog}/>}
+   {log?<Dashboard/>:null}
+   <MainRoutes/>
+   <Footer/>
     </div>
   )
 }
